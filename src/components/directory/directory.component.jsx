@@ -1,6 +1,8 @@
 import React from "react";
 import "./directory.styles.scss";
-import { MenuItem } from "../menu-item/menu-item.component.jsx";
+import MenuItem from "../menu-item/menu-item.component.jsx";
+import MenuItemPage from "../menu-item-page/menu-item-page.component.jsx";
+import { Route, Switch } from "react-router-dom";
 
 class Directory extends React.Component {
   constructor() {
@@ -51,7 +53,7 @@ class Directory extends React.Component {
     return <MenuItem key={id} {...attrs} />;
   };
 
-  render() {
+  getMenuItems = () => {
     const { sections } = this.state;
     return (
       <div className="directory-menu">
@@ -59,6 +61,25 @@ class Directory extends React.Component {
           return this.getMenuItem(item);
         })}
       </div>
+    );
+  };
+
+  render() {
+    const { sections } = this.state;
+    return (
+      <Switch>
+        <Route exact={true} path="/" render={this.getMenuItems} />
+        {sections.map((item) => {
+          return (
+            <Route
+              key={item.id}
+              exact={true}
+              path={`/${item.linkUrl}`}
+              render={(props) => <MenuItemPage title={item.title} />}
+            />
+          );
+        })}
+      </Switch>
     );
   }
 }
