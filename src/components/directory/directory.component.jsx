@@ -1,7 +1,7 @@
 import React from "react";
 import "./directory.styles.scss";
 import MenuItem from "../menu-item/menu-item.component.jsx";
-import MenuItemPage from "../menu-item-page/menu-item-page.component.jsx";
+import MenuItemPage from "../../pages/menu-item-page/menu-item-page.component.jsx";
 import { Route, Switch } from "react-router-dom";
 
 class Directory extends React.Component {

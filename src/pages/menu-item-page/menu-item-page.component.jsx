@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 
 const MenuItemPage = (props) => {
+  //console.log(props);
   const { title } = props;
   return (
     <div>
