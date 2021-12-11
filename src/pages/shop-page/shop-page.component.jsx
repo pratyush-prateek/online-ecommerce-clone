@@ -11,7 +11,8 @@ class ShopPage extends React.Component {
   }
 
   getCollectionPreview = (collectionPreviewItem) => {
-    return <CollectionPreview {...collectionPreviewItem} />;
+    const { id, ...attrs } = collectionPreviewItem;
+    return <CollectionPreview key={id} {...attrs} />;
   };
 
   render() {
