@@ -19,6 +19,11 @@
     color: black;
     border: 1px solid black;
   }
+
+  &:disabled {
+    cursor: default !important;
+  }
+
   &.google-sign-in {
     background-color: #4285f4;
 

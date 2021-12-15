@@ -51,4 +51,8 @@ $main-color: black;
       @include shrinkLabel();
     }
   }
+
+  .form-input-error {
+    color: red;
+  }
 }
