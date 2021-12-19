@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { TOGGLE_CART } from "../../redux/cart/cart.actions.js";
 
 const CartIcon = (props) => {
-  const { displayCart, toggleCart } = props;
+  const { displayCart, toggleCart, totalItems } = props;
   return (
     <div
       className="cart-icon"
@@ -14,7 +14,7 @@ const CartIcon = (props) => {
       }}
     >
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{totalItems}</span>
     </div>
   );
 };
@@ -28,9 +28,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     displayCart: state.cart.displayCart,
+    totalItems: state.cart.cartItems.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0),
   };
 };
 

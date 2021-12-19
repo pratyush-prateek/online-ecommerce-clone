@@ -3,8 +3,8 @@ import CollectionItem from "../collection-item/collection-item.component";
 import "./collection-preview.styles.scss";
 
 const getCollectionItem = (collectionItem) => {
-  const { id, ...attrs } = collectionItem;
-  return <CollectionItem key={id} {...attrs} />;
+  const { id } = collectionItem;
+  return <CollectionItem key={id} item={collectionItem} />;
 };
 
 const CollectionPreview = (props) => {
