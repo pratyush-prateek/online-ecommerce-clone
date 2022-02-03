@@ -1,8 +1,11 @@
 import React from "react";
 import "./cart-dropdown.styles.scss";
+import { withRouter } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component.jsx";
 import CartItem from "../cart-item/cart-item.component.jsx";
 import { connect } from "react-redux";
+import { selectCartItems } from "../../redux/cart/cart.selector";
+import { TOGGLE_CART } from "../../redux/cart/cart.actions";
 
 const getCartItemCard = (cartItem) => {
   const { id, ...attrs } = cartItem;
@@ -10,7 +13,7 @@ const getCartItemCard = (cartItem) => {
 };
 
 const CartDropdown = (props) => {
-  const { displayCart, cartItems } = props;
+  const { displayCart, cartItems, history, dispatch } = props;
   return (
     <div
       className="cart-dropdown"
@@ -19,11 +22,22 @@ const CartDropdown = (props) => {
       }}
     >
       <div className="cart-items">
-        {cartItems.map((item) => {
-          return getCartItemCard(item);
-        })}
+        {cartItems.length > 0 ? (
+          cartItems.map((item) => {
+            return getCartItemCard(item);
+          })
+        ) : (
+          <span className="empty-message">YOUR CART IS EMPTY</span>
+        )}
       </div>
-      <CustomButton>GO TO CHECKOUT</CustomButton>
+      <CustomButton
+        onClick={() => {
+          history.push("checkout");
+          dispatch({ type: TOGGLE_CART, payload: false });
+        }}
+      >
+        GO TO CHECKOUT
+      </CustomButton>
     </div>
   );
 };
@@ -31,8 +45,8 @@ const CartDropdown = (props) => {
 const mapStateToProps = (state) => {
   return {
     displayCart: state.cart.displayCart,
-    cartItems: state.cart.cartItems,
+    cartItems: selectCartItems(state),
   };
 };
 
-export default connect(mapStateToProps)(CartDropdown);
+export default withRouter(connect(mapStateToProps)(CartDropdown));

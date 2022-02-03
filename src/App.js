@@ -6,6 +6,7 @@ import HomePage from "./pages/homepage/homepage.component.jsx";
 import ShopPage from "./pages/shop-page/shop-page.component.jsx";
 import Header from "./components/header/header.component";
 import SignInUp from "./pages/sign-in-up-page/sign-in-up.component";
+import CheckoutPage from "./pages/checkout-page/checkout-page.component";
 //Routing
 import { Route, Switch, Redirect } from "react-router-dom";
 //Firebase Auth
@@ -52,6 +53,7 @@ class App extends React.Component {
             }}
           />
           <Route path="/shop" exact={true} component={ShopPage} />
+          <Route path="/checkout" exact={true} component={CheckoutPage} />
           <Route path="/" component={HomePage} />
         </Switch>
       </div>
